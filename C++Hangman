@@ -19,27 +19,8 @@ int main() {
 	srand(time(0)); // Seed the random number generator
 	string word = wordList[rand() % 8]; // Randomly pick a word from the list
 	string guessedword(word.length(), '_'); // create the guessed word filled with underscores
-	string oldGuessedword(word.length(), '_');
 
 	cout << "welcome to Hangman!\n"; // welcome message
-
-	// Game Loop runs until the player runs out of guesses or guesses the word
-	while (misses < MAX_INCORRECT && guessedword != word) {
-		display(guessedword); // Display the current state of the game
-		cout << "Enter your guess:";
-		char guess;
-		cin >> guess; // Get the player's guess
-
-		string oldGuessedWord = guessedword; // keep track of the word before the guess
-		guessedword = processGuess(guess, word, guessedword); // Process the guess
-
-		if (guessedword == oldGuessedword) {
-			cout << "Ooops! That letter isn't in there!\n"; // Inform the player the guess was wrong
-		}
-		else {
-			cout << "Good guess!\n"; // Congratulate the player on a correct guess
-		}
-	} //end of game loop!
 
 	// Check if the game ended with a win or loss
 	if (guessedword == word) {
@@ -147,6 +128,7 @@ void display(string guessedword) {
 }
 // Function to hceck the player's guess against the word
 string processGuess(char guess, string word, string guessedword) {
+	string oldGuessedword(word.length(), '_');
 	bool isCorrect = false;
 	for (int i = 0; i < word.length(); i++) { // loop through each letter in the word
 		if (word[i] == guess && guessedword[i] == '_') { // If guess is correct and hasn't been guessed before
@@ -174,4 +156,22 @@ string processGuess(char guess, string word, string guessedword) {
 		}
 	}
 	return guessedword; // Return the updated guessed word
+
+	// Game Loop runs until the player runs out of guesses or guesses the word
+	while (misses < MAX_INCORRECT && guessedword != word) {
+		display(guessedword); // Display the current state of the game
+		cout << "Enter your guess:";
+		char guess;
+		cin >> guess; // Get the player's guess
+
+		string oldGuessedWord = guessedword; // keep track of the word before the guess
+		guessedword = processGuess(guess, word, guessedword); // Process the guess
+
+		if (guessedword == oldGuessedword) {
+			cout << "Ooops! That letter isn't in there!\n"; // Inform the player the guess was wrong
+		}
+		else {
+			cout << "Good guess!\n"; // Congratulate the player on a correct guess
+		}
+	} //end of game loop!
 }
