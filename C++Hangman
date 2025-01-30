@@ -1,3 +1,4 @@
+
 #include <iostream> // Library for input and output, used for things like cin and cout
 #include <string>   // Library that allows us to use and manipulate strings
 #include <cstdlib>  // Library for general purpose functions, including random numbers
@@ -9,13 +10,13 @@ void displayHangman();
 void display(string guessedword);
 
 //global constants and variables
-const int MAX_INCORRECT = 7; // Maximum wrong guesses allowed
+const int MAX_INCORRECT = 6; // Maximum wrong guesses allowed
 char incorrect[MAX_INCORRECT]; // Array to hold incorrect guesses
 int numIncorrect = 0; // Counter for the number of incorrect guesses made
 int misses = 0; // Counter for the number of misses
 // Main function where the game runs
 int main() {
-	string wordList[8] = { "I had the best three years of my life in prison", "Ruin has come to our family", "Tarnished", "Three, Two, One, Lets JAM", "game", "password", "name something", "The Nameless King"}; // List of words to guess
+	string wordList[8] = { "I had the best three years of my life in prison", "Ruin has come to our family", "Tarnished", "Three, Two, One, Lets JAM", "game", "password", "name something", "The Nameless King" }; // List of words to guess
 	srand(time(0)); // Seed the random number generator
 	string word = wordList[rand() % 8]; // Randomly pick a word from the list
 	string guessedword(word.length(), '_'); // create the guessed word filled with underscores
@@ -69,7 +70,7 @@ void displayHangman() {
 		cout << "  +---+\n";
 		cout << "  |   |\n";
 		cout << "  O   |\n";
-		cout << " /:   |\n";
+		cout << " |:   |\n";
 		cout << "     |\n";
 		cout << "      |\n";
 		cout << "---------\n";
@@ -78,7 +79,7 @@ void displayHangman() {
 		cout << "  +---+\n";
 		cout << "  |   |\n";
 		cout << "  O   |\n";
-		cout << " /:\   |\n";
+		cout << " |:|   |\n";
 		cout << "      |\n";
 		cout << "      |\n";
 		cout << "---------\n";
@@ -87,27 +88,18 @@ void displayHangman() {
 		cout << "  +---+\n";
 		cout << "  |   |\n";
 		cout << "  O   |\n";
-		cout << " /:\   |\n";
+		cout << " |:|   |\n";
 		cout << "  :    |\n";
-		cout << "      |\n";
+		cout << " |    |\n";
 		cout << "---------\n";
 		break;
 	case 6:
 		cout << "  +---+\n";
 		cout << "  |   |\n";
 		cout << "  O   |\n";
-		cout << " /:\   |\n";
+		cout << " |:|   |\n";
 		cout << "  :    |\n";
-		cout << " /     |\n";
-		cout << "---------\n";
-		break;
-	case 7:
-		cout << "  +---+\n";
-		cout << "  |   |\n";
-		cout << "  O   |\n";
-		cout << " /:\   |\n";
-		cout << "  :    |\n";
-		cout << " / \    |\n";
+		cout << " | |    |\n";
 		cout << "---------\n";
 		break;
 	}
@@ -152,7 +144,7 @@ string processGuess(char guess, string word, string guessedword) {
 		// If the guess was not found in the incorrect guesses
 		if (!alreadyGuessed) {
 			incorrect[numIncorrect++] = guess; // Add the new incorrect guess
-			misses=0; // Increment the misses counter
+			misses = 0; // Increment the misses counter
 		}
 	}
 	return guessedword; // Return the updated guessed word
